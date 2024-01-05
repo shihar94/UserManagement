@@ -12,9 +12,6 @@ const app = express();
 //registering view engine
 app.set('view engine' ,'ejs');
 
-//app.set('views', __dirname);
-
-
 //make connection to mongodb
 const mongoClientURL ='mongodb://127.0.0.1:27017/crud';
 
@@ -41,3 +38,11 @@ app.get('/display' , (req , res) =>{
     res.render('display');
 })
 
+app.get('/displayUsers' , (req , res) => {
+    User.find({})
+    .then(result => {
+        res.render ('index' , {userList : result})
+    }).catch( err => {
+        console.log(err);
+    })
+})
