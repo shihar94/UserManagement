@@ -9,6 +9,12 @@ let PORT = 3001;
 //express app init 
 const app = express();
 
+//registering view engine
+app.set('view engine' ,'ejs');
+
+//app.set('views', __dirname);
+
+
 //make connection to mongodb
 const mongoClientURL ='mongodb://127.0.0.1:27017/crud';
 
@@ -31,6 +37,7 @@ app.get("/getUsers" , (req , res) => {
     })
 })
 
-//registering view engine
-app.set('view engine' ,'ejs');
+app.get('/display' , (req , res) =>{
+    res.render('display');
+})
 
