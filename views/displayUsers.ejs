@@ -3,14 +3,27 @@
     <body>
         <%- include("./partials/nav.ejs") %>
         <h2> All Users</h2>
+
+       
+
         <% if (userList.length > 0 ){%>
-            <% userList.forEach(user=>{%>
-                <p><%= user.name%></p>
-                <p><%= user.age%></p>
-                <p><%= user.email%></p>
-            <% }) %>
+
+            <table id="UserTable"> 
+                <tr>
+                    <th>First_Name</th><th>Last_Name</th><th>Marks</th><th>Edit</th>
+                </tr> 
+
+                <% userList.forEach(user=>{%>
+                <tr>
+                    <td><%= user.name%></td><td><%= user.age%></td><td><%= user.email%></td><td>1</td>
+                </tr>
+
+                    <% }) %>
+
+            </table>
+
         <% } else { %>
-            <p>There are no blogs to display...</p>
+            <p>There are no Users to display...</p>
         <% } %>
 
     </body>

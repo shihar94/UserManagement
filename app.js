@@ -60,11 +60,13 @@ app.get('/error', (req, res) => {
     res.render('404' , {title: 'Blog not found'});
 })
 
-app.post('/' , (req , res) => {
+app.post('/createUsers' , (req , res) => {
     const user =  new User(req.body);
     user.save()
     .then(result=> {
         console.log("Success");
+        res.redirect('/displayUsers');
+
     })
     .catch(err=>{
         console.log(err);
