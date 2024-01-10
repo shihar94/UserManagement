@@ -80,3 +80,16 @@ app.post('/createUsers' , (req , res) => {
 app.get('/about' ,(req , res) => {
     res.render('about' , {title:"About"});
 })
+
+app.get('/delete' , (req , res) => {
+    const id = req.params.id;
+    console.log(id);
+    User.findByIdAndDelete(id)
+    .then(result => {
+        res.json({redirect:'/displayUsers'});
+    })
+    .catch(err=>{
+        console.log("Erros");
+        console.log(err);
+    })
+})
