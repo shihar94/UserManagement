@@ -12,6 +12,11 @@ const app = express();
 //registering view engine
 app.set('view engine' ,'ejs');
 
+//middleware and static files
+app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan('dev'));
+
 //make connection to mongodb
 const mongoClientURL ='mongodb://127.0.0.1:27017/crud';
 
@@ -41,8 +46,31 @@ app.get('/display' , (req , res) =>{
 app.get('/displayUsers' , (req , res) => {
     User.find({})
     .then(result => {
-        res.render ('index' , {userList : result})
+        res.render ('displayUsers' , {userList : result , title:"User List"})
     }).catch( err => {
         console.log(err);
     })
+})
+
+app.get('/createUsers' , (req , res) => {
+    res.render('createUser' , {title:'Create New User'});
+})
+
+app.get('/error', (req, res) => {
+    res.render('404' , {title: 'Blog not found'});
+})
+
+app.post('/' , (req , res) => {
+    const user =  new User(req.body);
+    user.save()
+    .then(result=> {
+        console.log("Success");
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+})
+
+app.get('/about' ,(req , res) => {
+    res.render('about' , {title:"About"});
 })

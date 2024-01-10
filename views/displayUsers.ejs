@@ -1,0 +1,18 @@
+<html lang="en">
+    <%- include("./partials/head.ejs") %>
+    <body>
+        <%- include("./partials/nav.ejs") %>
+        <h2> All Users</h2>
+        <% if (userList.length > 0 ){%>
+            <% userList.forEach(user=>{%>
+                <p><%= user.name%></p>
+                <p><%= user.age%></p>
+                <p><%= user.email%></p>
+            <% }) %>
+        <% } else { %>
+            <p>There are no blogs to display...</p>
+        <% } %>
+
+    </body>
+    <%- include("./partials/footer.ejs") %>
+</html>
