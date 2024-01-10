@@ -39,6 +39,10 @@ app.get("/getUsers" , (req , res) => {
     })
 })
 
+app.get("" , (req, res) => {
+    res.redirect("/displayUsers");
+})
+
 app.get('/display' , (req , res) =>{
     res.render('display');
 })
