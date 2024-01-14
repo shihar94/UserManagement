@@ -15,7 +15,7 @@
 
                 <% userList.forEach(user=>{%>
                 <tr>
-                    <td><%= user.name%></td><td><%= user.age%></td><td><%= user.email%></td><td><a href="/delete/<%=user._id%>">Delete</a></a></td><td><a href="/update/<%=user._id%>">Update</a></a></td>
+                    <td><a href="/displayUser/<%=user._id%>"><%= user.name%></a></td><td><%= user.age%></td><td><%= user.email%></td><td><a href="/delete/<%=user._id%>">Delete</a></a></td><td><a href="/update/<%=user._id%>">Update</a></a></td>
                 </tr>
 
                     <% }) %>

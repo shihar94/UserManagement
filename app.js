@@ -100,7 +100,7 @@ app.get('/delete/:id' , (req , res) => {
 app.get('/update/:id' , (req , res) => {
     const id = req.params.id;
     console.log(id);
-    
+
     User.findOneAndUpdate(id)
     .then(result => {
         //console.log(id);
@@ -112,4 +112,21 @@ app.get('/update/:id' , (req , res) => {
         console.log("Erros");
         console.log(err);
     })
+})
+
+//display only one  user
+app.get('/displayUser/:id' , (req , res) =>{
+    const id = req.params.id;
+    console.log(id);
+    User.findById(id)
+    .then(result => {
+        res.render('displayOnlyUser' , {userList : result , title:"User List"})
+        console.log(result.name + result.age + result.email);
+        console.log("Success");
+    }).catch(err=>{
+        console.log(err);
+    })
+    //console.log(user.name);
+    //res.redirect('/about');
+
 })
