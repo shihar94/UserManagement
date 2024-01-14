@@ -81,15 +81,31 @@ app.get('/about' ,(req , res) => {
     res.render('about' , {title:"About"});
 })
 
-app.get('/delete' , (req , res) => {
+app.get('/delete/:id' , (req , res) => {
     const id = req.params.id;
     console.log(id);
     User.findByIdAndDelete(id)
     .then(result => {
-        res.json({redirect:'/displayUsers'});
+        console.log(id);
+        res.redirect('/displayUsers');
+        //res.render('about' , {title:"About"});
+        //res.render ('displayUsers' , {userList : result , title:"User List"})
     })
     .catch(err=>{
         console.log("Erros");
+        console.log(err);
+    })
+})
+
+app.get('/:id' , (req , res) =>{
+    const id = req.params.id;
+    User.findByIdAndDelete(id)
+    .then(result => {
+        console.log("Success");
+        console.log()
+        res.render('displayOnlyUser',{userList:result , title:"result.name"});
+    })
+    .catch(err=>{
         console.log(err);
     })
 })

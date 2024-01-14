@@ -10,12 +10,12 @@
 
             <table id="UserTable"> 
                 <tr>
-                    <th>First_Name</th><th>Last_Name</th><th>Marks</th><th>Edit</th>
+                    <th>Name</th><th>Age</th><th>Email</th><th>Edit</th>
                 </tr> 
 
                 <% userList.forEach(user=>{%>
                 <tr>
-                    <td><%= user.name%></td><td><%= user.age%></td><td><%= user.email%></td><td><a href="/delete">Delete</a></a></td>
+                    <td><%= user.name%></td><td><%= user.age%></td><td><%= user.email%></td><td><a href="/delete/<%=user._id%>">Delete</a></a></td>
                 </tr>
 
                     <% }) %>
