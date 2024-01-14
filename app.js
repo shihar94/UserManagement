@@ -97,15 +97,19 @@ app.get('/delete/:id' , (req , res) => {
     })
 })
 
-app.get('/:id' , (req , res) =>{
+app.get('/update/:id' , (req , res) => {
     const id = req.params.id;
-    User.findByIdAndDelete(id)
+    console.log(id);
+    
+    User.findOneAndUpdate(id)
     .then(result => {
-        console.log("Success");
-        console.log()
-        res.render('displayOnlyUser',{userList:result , title:"result.name"});
+        //console.log(id);
+        res.redirect('/displayUsers');
+        //res.render('about' , {title:"About"});
+        //res.render ('displayUsers' , {userList : result , title:"User List"})
     })
     .catch(err=>{
+        console.log("Erros");
         console.log(err);
     })
 })
