@@ -3,15 +3,32 @@
 
 <body>
   <%- include("./partials/nav.ejs") %>
+  <script>
+    function validateform(){
+      var name = document.myform.name.value;
+      var email=document.myform.email.value;
+      var age=document.myform.age.value;
 
+      if(name==null || name == ""){
+        alert("Name can't be blank");
+        return false;
+      }
+      if(!/^[0-9]+$/.test(age)){
+        alert("Incorrect age")
+        return false;
+      }
+
+    }
+
+  </script>
   <div class="create-blog content">
-    <form action="  " method="POST">
+    <form name = "myform" action="  " method="POST" onsubmit="return validateform()">
       <label for="name">Name:</label>
-      <input type="text" id="name" name="name" required>
+      <input type="text" id="name" name="name" >
       <label for="Email">Email:</label>
-      <input type="text" id="email" name="email" required>
+      <input type="email" id="email" name="email">
       <label for="Age">Age:</label>
-      <input type="text" id="age" name="age" required>
+      <input type="text" id="age" name="age">
       <button>Submit User</button>
     </form>
   </div>
