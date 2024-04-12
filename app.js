@@ -20,14 +20,17 @@ app.use(morgan('dev'));
 //make connection to mongodb
 const mongoClientURL ='mongodb://127.0.0.1:27017/crud';
 
-mongoose.connect(mongoClientURL, {useNewUrlParser: true, useUnifiedTopology: true})
-.then(function(result){
+const startServer = async(port) => {
+    mongoose.connect(mongoClientURL, {useNewUrlParser: true, useUnifiedTopology: true})
+    .then(function(result){
     app.listen(PORT,()=>{
         console.log("Server is running");
     })
-}).catch(function(err){
-    console.log(err);
-});
+    }).catch(function(err){
+        console.log(err);
+    });
+}
+
 
 app.get("/getUsers" , (req , res) => {
     User.find({})
@@ -130,3 +133,5 @@ app.get('/displayUser/:id' , (req , res) =>{
     //res.redirect('/about');
 
 })
+
+module.exports = startServer;
