@@ -1,7 +1,7 @@
 <html lang="en">
 <%- include("./partials/head.ejs") %>
 
-<body>
+<body >
   
   <%- include("./partials/nav.ejs") %>
   <script>
@@ -22,13 +22,20 @@
     }
 
   </script>
-  <div class="">
-    <section class="container mt-5 d-flex form form-container create-blog content">
+
+  <section class="container-fluid mt-5 text-center">
+    <h1>Create New User</h1>
+  </section>
+  
+  <section class="container-fluid  d-flex form form-container create-blog content customBody">
+      
+     
+
       <div class="col-md-12">
-        <form name="myform" method="POST" onsubmit="return validateform()">
+        <form name="myform" action=" " method="POST" onsubmit="return validateform()">
           <div class="mb-3">
             <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="name" >
+            <input type="text" class="form-control" id="name" name="name">
           </div>
           <div class="mb-3">
             <label for="Email" class="form-label">Email</label>
@@ -36,15 +43,12 @@
           </div>
           <div class="mb-3">
             <label for="age" class="form-label">Age</label>
-            <input type="text" class="form-control" id="age" >
+            <input type="text" class="form-control" id="age" name="age" >
           </div>
           <button type="submit" class="btn btn-primary">Submit User</button>
         </form>
       </div>
-      
     </section>
-   
-  </div>
 
 
   <%- include("./partials/footer.ejs") %>
