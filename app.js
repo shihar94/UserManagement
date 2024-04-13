@@ -18,7 +18,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 
 //make connection to mongodb
-const mongoClientURL ='mongodb://127.0.0.1:27017/crud';
+//const mongoClientURL ='mongodb://127.0.0.1:27017/crud';
+const mongoClientURL = 'mongodb+srv://shihar1994:Shihar12!@cluster0.xypkwry.mongodb.net/?retryWrites=true&w=majority';
 
 const startServer = async(port) => {
     mongoose.connect(mongoClientURL, {useNewUrlParser: true, useUnifiedTopology: true})
