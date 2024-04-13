@@ -2,11 +2,12 @@ const express = require("express");
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/UsersRoutes');
-
+require('dotenv').config();
+console.log(process.env.PORT);
 
 
 //define port to use
-let PORT = 3001;
+let PORT = process.env.PORT;
 
 //express app init 
 const app = express();
@@ -21,8 +22,8 @@ app.use(morgan('dev'));
 app.use('',userRoutes);
 
 //make connection to mongodb
-const mongoClientURL ='mongodb://127.0.0.1:27017/crud';
-
+//const mongoClientURL = process.env.MONGO_URL;
+const mongoClientURL = process.env.MONGO_ATLAS_URL;
 
 const startServer = async(port) => {
     mongoose.connect(mongoClientURL, {useNewUrlParser: true, useUnifiedTopology: true})
