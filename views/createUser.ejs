@@ -2,6 +2,7 @@
 <%- include("./partials/head.ejs") %>
 
 <body>
+  
   <%- include("./partials/nav.ejs") %>
   <script>
     function validateform(){
@@ -21,17 +22,30 @@
     }
 
   </script>
-  <div class="create-blog content">
-    <form name = "myform" action="  " method="POST" onsubmit="return validateform()">
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" >
-      <label for="Email">Email:</label>
-      <input type="email" id="email" name="email">
-      <label for="Age">Age:</label>
-      <input type="text" id="age" name="age">
-      <button>Submit User</button>
-    </form>
+  <div class="">
+    <section class="container mt-5 d-flex form form-container create-blog content">
+      <div class="col-md-12">
+        <form name="myform" method="POST" onsubmit="return validateform()">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" >
+          </div>
+          <div class="mb-3">
+            <label for="Email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email">
+          </div>
+          <div class="mb-3">
+            <label for="age" class="form-label">Age</label>
+            <input type="text" class="form-control" id="age" >
+          </div>
+          <button type="submit" class="btn btn-primary">Submit User</button>
+        </form>
+      </div>
+      
+    </section>
+   
   </div>
+
 
   <%- include("./partials/footer.ejs") %>
 </body>
