@@ -2,6 +2,7 @@ const express = require("express");
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/UsersRoutes');
+const loginRoutes = require('./routes/loginRoutes');
 require('dotenv').config();
 console.log(process.env.PORT);
 
@@ -20,10 +21,11 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 app.use('',userRoutes);
+app.use('/login',loginRoutes);
 
 //make connection to mongodb
-//const mongoClientURL = process.env.MONGO_URL;
-const mongoClientURL = process.env.MONGO_ATLAS_URL;
+const mongoClientURL = process.env.MONGO_URL;
+//const mongoClientURL = process.env.MONGO_ATLAS_URL;
 
 const startServer = async(port) => {
     mongoose.connect(mongoClientURL, {useNewUrlParser: true, useUnifiedTopology: true})
