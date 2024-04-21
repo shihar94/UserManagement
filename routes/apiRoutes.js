@@ -12,4 +12,8 @@ router.get('/displayUserAPI/:id' , userController.displaySingleUserAPI);
 
 router.post("/postUserAPI", userController.postCreateUserAPI);
 
+//update user using APi
+
+router.put("/updateUserAPI/:id",userController.userUpdateAPI);
+
 module.exports = router;

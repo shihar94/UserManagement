@@ -128,6 +128,22 @@ const usersRedirect = (req , res) => {
     res.redirect("/displayUsers");
 }
 
+const userUpdateAPI = (req , res ) => {
+    const id = req.params.id;
+    console.log(id);
+    User.findByIdAndUpdate(id ,{
+        name:req.body.name,
+        age:req.body.age,
+        email:req.body.email
+    }).then(result=>{
+        res.json(result);
+        console.log("Success");
+    }).catch(err=>{
+        console.log(err);
+        res.json("error");
+    })
+}
+
 module.exports = {
     userControllerGet,
     displayUsers,
@@ -142,4 +158,5 @@ module.exports = {
     usersRedirect,
     displaySingleUserAPI,
     postCreateUserAPI,
+    userUpdateAPI,
 }
