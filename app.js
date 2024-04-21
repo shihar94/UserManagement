@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/UsersRoutes');
 const loginRoutes = require('./routes/loginRoutes');
+const apiRoutes = require('./routes/apiRoutes');
 require('dotenv').config();
 console.log(process.env.PORT);
 
@@ -23,6 +24,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use('',userRoutes);
 app.use('',loginRoutes);
+app.use('/api/v1',apiRoutes);
 
 //make connection to mongodb
 const mongoClientURL = process.env.MONGO_URL;
