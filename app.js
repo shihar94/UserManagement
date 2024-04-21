@@ -20,8 +20,9 @@ app.set('view engine' ,'ejs');
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
+app.use(express.json());
 app.use('',userRoutes);
-app.use('/login',loginRoutes);
+app.use('',loginRoutes);
 
 //make connection to mongodb
 const mongoClientURL = process.env.MONGO_URL;

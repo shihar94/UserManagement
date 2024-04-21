@@ -32,6 +32,18 @@ const postCreateUser = (req , res) => {
     })
 }
 
+const postCreateUserAPI = (req , res) => {
+    const user = new User(req.body);
+    user.save()
+    .then( result => {
+        res.json(req.body);
+        console.log("Success");
+    }).catch(err=> {
+        console.log(err);
+        res.json("error");
+    })
+}
+
 const getCreateUser = (req , res) => {
     res.render('createUser' , {title:'Create New User'});
 }
@@ -73,16 +85,32 @@ const updateUserById = (req , res) => {
     })
 }
 
+const displaySingleUserAPI = (req,res) => {
+    const id = req.params.id;
+    console.log(id);
+    User.findById(id)
+    .then(result=>{
+        res.send(result);
+    }).catch(err=>{
+        console.log(err);
+        const data = {error:"User Not Found" , id:id};
+        res.json(data);
+    })
+    
+}
+
 const displaySingleUser = (req , res) => {
     const id = req.params.id;
     console.log(id);
     User.findById(id)
     .then(result => {
+        res.json(result);
         res.render('displayOnlyUser' , {userList : result , title:"User List"})
         console.log(result.name + result.age + result.email);
         console.log("Success");
     }).catch(err=>{
         console.log(err);
+        
     })
     //console.log(user.name);
     //res.redirect('/about');
@@ -112,4 +140,6 @@ module.exports = {
     errorDisplay,
     getAbout,
     usersRedirect,
+    displaySingleUserAPI,
+    postCreateUserAPI,
 }
