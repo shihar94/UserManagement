@@ -144,6 +144,19 @@ const userUpdateAPI = (req , res ) => {
     })
 }
 
+const userDeleteAPI = (req , res ) => {
+    const id = req.params.id;
+    console.log(id);
+    User.findByIdAndDelete(id)
+    .then (result => {
+        res.json(result);
+        console.log("Success");
+    }).catch(err=>{
+        console.log("Error");
+        res.json("Error");
+    })
+}
+
 module.exports = {
     userControllerGet,
     displayUsers,
@@ -159,4 +172,5 @@ module.exports = {
     displaySingleUserAPI,
     postCreateUserAPI,
     userUpdateAPI,
+    userDeleteAPI,
 }

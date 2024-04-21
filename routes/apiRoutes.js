@@ -16,4 +16,7 @@ router.post("/postUserAPI", userController.postCreateUserAPI);
 
 router.put("/updateUserAPI/:id",userController.userUpdateAPI);
 
+//delete user by API
+router.delete("/deleteUser/:id" ,userController.userDeleteAPI);
+
 module.exports = router;
