@@ -1,14 +1,6 @@
 const User = require('../models/user')
 
-const userControllerGet = (req , res) =>{
-    User.find({})
-    .then(function(users){
-        res.json(users);
-        console.log("Printing");
-    }).catch(function(err){
-        console.log(err);
-    })
-}
+
 
 const displayUsers = (req , res) => {
     User.find({})
@@ -32,25 +24,12 @@ const postCreateUser = (req , res) => {
     })
 }
 
-const postCreateUserAPI = (req , res) => {
-    const user = new User(req.body);
-    user.save()
-    .then( result => {
-        res.json(req.body);
-        console.log("Success");
-    }).catch(err=> {
-        console.log(err);
-        res.json("error");
-    })
-}
 
 const getCreateUser = (req , res) => {
     res.render('createUser' , {title:'Create New User'});
 }
 
-const getDisplay = (req , res) => {
-    res.render('display');
-}
+
 
 const deleteUserbyId = (req , res) => {
     const id = req.params.id;
@@ -85,19 +64,7 @@ const updateUserById = (req , res) => {
     })
 }
 
-const displaySingleUserAPI = (req,res) => {
-    const id = req.params.id;
-    console.log(id);
-    User.findById(id)
-    .then(result=>{
-        res.send(result);
-    }).catch(err=>{
-        console.log(err);
-        const data = {error:"User Not Found" , id:id};
-        res.json(data);
-    })
-    
-}
+
 
 const displaySingleUser = (req , res) => {
     const id = req.params.id;
@@ -124,53 +91,19 @@ const getAbout = (req , res) => {
     res.render('about' , {title:"About"});
 }
 
-const usersRedirect = (req , res) => {
-    res.redirect("/displayUsers");
-}
 
-const userUpdateAPI = (req , res ) => {
-    const id = req.params.id;
-    console.log(id);
-    User.findByIdAndUpdate(id ,{
-        name:req.body.name,
-        age:req.body.age,
-        email:req.body.email
-    }).then(result=>{
-        res.json(result);
-        console.log("Success");
-    }).catch(err=>{
-        console.log(err);
-        res.json("error");
-    })
-}
 
-const userDeleteAPI = (req , res ) => {
-    const id = req.params.id;
-    console.log(id);
-    User.findByIdAndDelete(id)
-    .then (result => {
-        res.json(result);
-        console.log("Success");
-    }).catch(err=>{
-        console.log("Error");
-        res.json("Error");
-    })
-}
+
+
+
 
 module.exports = {
-    userControllerGet,
     displayUsers,
     postCreateUser,
     getCreateUser,
-    getDisplay,
     deleteUserbyId,
     updateUserById,
     displaySingleUser,
     errorDisplay,
     getAbout,
-    usersRedirect,
-    displaySingleUserAPI,
-    postCreateUserAPI,
-    userUpdateAPI,
-    userDeleteAPI,
 }

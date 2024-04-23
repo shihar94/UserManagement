@@ -5,17 +5,13 @@ const User = require('../models/user')
 const userController = require('../controllers/userController');
 
 
-router.get("/getUsers" , userController.userControllerGet);
 
-router.get("" , userController.usersRedirect);
-
-router.get('/display' , userController.getDisplay);
 
 router.get('/displayUsers' , userController.displayUsers)
 
 router.get('/createUsers' , userController.getCreateUser);
 
-router.get('/error', userController.errorDisplay);
+
 
 router.post('/createUsers' , userController.postCreateUser);
 
@@ -29,5 +25,6 @@ router.get('/update/:id' , userController.updateUserById);
 //display only one  user
 router.get('/displayUser/:id' , userController.displaySingleUser);
 
+router.get('', userController.errorDisplay);
 
 module.exports = router;
