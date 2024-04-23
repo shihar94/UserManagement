@@ -13,8 +13,6 @@ router.get('/createUsers' , userController.getCreateUser);
 
 
 
-router.post('/createUsers' , userController.postCreateUser);
-
 router.get('/about' ,userController.getAbout);
     
 
@@ -24,6 +22,7 @@ router.get('/update/:id' , userController.updateUserById);
 
 //display only one  user
 router.get('/displayUser/:id' , userController.displaySingleUser);
+router.post('/createUsers' , userController.postCreateUser);
 
 router.get('', userController.errorDisplay);
 

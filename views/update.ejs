@@ -2,18 +2,56 @@
     <%- include("./partials/head.ejs") %>
     <body>
         <%- include("./partials/nav.ejs") %>
-        <div class="create-blog content">
-            <form action="  " method="POST">
-              <label for="name">Name:</label>
-              <input type="text" id="name" name="name" required>
-              <label for="Email">Email:</label>
-              <input type="text" id="email" name="email" required>
-              <label for="Age">Age:</label>
-              <input type="text" id="age" name="age" required>
-              <button>Update User</button>
+        <script>
+          function validateform(){
+            var name = document.myform.name.value;
+            var email=document.myform.email.value;
+            var age=document.myform.age.value;
+      
+            if(name==null || name == ""){
+              alert("Name can't be blank");
+              return false;
+            }
+            if(!/^[0-9]+$/.test(age)){
+              alert("Incorrect age")
+              return false;
+            }
+      
+          }
+      
+        </script>
+
+        <section class="container-fluid mt-2 text-center">
+          
+          <div class="col-md-12">
+            <h2> Update User</h2>
+        </div>
+      </section>
+
+        <section class="container-fluid  d-flex form form-container create-blog content customBody">
+          <div class="col-md-12">
+            <form name="myform" action=" " method="POST" onsubmit="return validateform()">
+              <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="<%=userList.name%>">
+              </div>
+              <div class="mb-3">
+                <label for="Email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="<%=userList.email%>">
+              </div>
+              <div class="mb-3">
+                <label for="age" class="form-label">Age</label>
+                <input type="text" class="form-control" id="age" name="age" placeholder="<%=userList.age%>" >
+              </div>
+              <button type="submit" class="btn btn-primary">Submit User</button>
             </form>
           </div>
+        </section>
 
+
+
+        
+        
     </body>
     <%- include("./partials/footer.ejs") %>
 </html>

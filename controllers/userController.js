@@ -3,6 +3,7 @@ const User = require('../models/user')
 
 
 const displayUsers = (req , res) => {
+    console.log("Accessing Display Users in UserController.js");
     User.find({})
     .then(result => {
         res.render ('displayUsers' , {userList : result , title:"User List"})
@@ -12,6 +13,7 @@ const displayUsers = (req , res) => {
 }
 
 const postCreateUser = (req , res) => {
+    console.log("Accessing postCreateUser in UserController.js");
     const user =  new User(req.body);
     user.save()
     .then(result=> {
@@ -26,12 +28,14 @@ const postCreateUser = (req , res) => {
 
 
 const getCreateUser = (req , res) => {
+    console.log("Accessing getCreateUser in UserController.js");
     res.render('createUser' , {title:'Create New User'});
 }
 
 
 
 const deleteUserbyId = (req , res) => {
+    console.log("Accessing deleteUserbyId in UserController.js");
     const id = req.params.id;
     console.log(id);
     User.findByIdAndDelete(id)
@@ -48,30 +52,31 @@ const deleteUserbyId = (req , res) => {
 }
 
 const updateUserById = (req , res) => {
+    console.log("Accessing updateUserById in UserController.js");
     const id = req.params.id;
     console.log(id);
 
-    User.findOneAndUpdate(id)
+    User.findById(id)
     .then(result => {
-        //console.log(id);
-        res.redirect('/displayUsers');
-        //res.render('about' , {title:"About"});
-        //res.render ('displayUsers' , {userList : result , title:"User List"})
-    })
-    .catch(err=>{
-        console.log("Erros");
+        //res.json(result);
+        res.render('update' , {userList : result , title:"User List"})
+        console.log(result.name + result.age + result.email);
+        console.log("Success");
+    }).catch(err=>{
         console.log(err);
+        
     })
 }
 
 
 
 const displaySingleUser = (req , res) => {
+    console.log("Accessing displaySingleUser in UserController.js");
     const id = req.params.id;
     console.log(id);
     User.findById(id)
     .then(result => {
-        res.json(result);
+        //res.json(result);
         res.render('displayOnlyUser' , {userList : result , title:"User List"})
         console.log(result.name + result.age + result.email);
         console.log("Success");
@@ -84,10 +89,12 @@ const displaySingleUser = (req , res) => {
 }
 
 const errorDisplay = (req , res) => {
+    console.log("Accessing errorDisplay in UserController.js");
     res.render('404' , {title: 'Blog not found'});
 }
 
 const getAbout = (req , res) => {
+    console.log("Accessing getAbout  in UserController.js");
     res.render('about' , {title:"About"});
 }
 
