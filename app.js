@@ -22,7 +22,7 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 app.use(express.json());
-app.use('/user',userRoutes);
+app.use('',userRoutes);
 app.use('',loginRoutes);
 app.use('/api/v1',apiRoutes);
 

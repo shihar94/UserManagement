@@ -20,10 +20,8 @@ router.get('/about' ,userController.getAbout);
 
 router.get('/delete/:id' , userController.deleteUserbyId);
 
-router.get('/update/:id' , userController.updateUserById);
+router.get('/:id' , userController.displayUserById);
 
-//display only one  user
-router.get('/displayUser/:id' , userController.displaySingleUser);
 
 router.get('', userController.errorDisplay);
 

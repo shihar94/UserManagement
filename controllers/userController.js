@@ -47,41 +47,28 @@ const deleteUserbyId = (req , res) => {
     })
 }
 
-const updateUserById = (req , res) => {
+const displayUserById = (req , res) => {
     const id = req.params.id;
     console.log(id);
-
-    User.findOneAndUpdate(id)
-    .then(result => {
-        //console.log(id);
-        res.redirect('/displayUsers');
-        //res.render('about' , {title:"About"});
-        //res.render ('displayUsers' , {userList : result , title:"User List"})
-    })
-    .catch(err=>{
-        console.log("Erros");
-        console.log(err);
-    })
-}
-
-
-
-const displaySingleUser = (req , res) => {
-    const id = req.params.id;
-    console.log(id);
+    console.log("Accessing Update User ID Function");
     User.findById(id)
-    .then(result => {
-        res.json(result);
-        res.render('displayOnlyUser' , {userList : result , title:"User List"})
+    .then(result=>{
+        //res.json(result);
+        console.log("Printing the result");
         console.log(result.name + result.age + result.email);
-        console.log("Success");
+        console.log("End Printing the result");
+        res.render ('singleUser' , {userList : result , title:"User " + id + " " + result.name});
+        //res.redirect('/displayUsers');
     }).catch(err=>{
         console.log(err);
-        
     })
-    //console.log(user.name);
-    //res.redirect('/about');
+
+
+
+    
 }
+
+
 
 const errorDisplay = (req , res) => {
     res.render('404' , {title: 'Blog not found'});
@@ -94,16 +81,12 @@ const getAbout = (req , res) => {
 
 
 
-
-
-
 module.exports = {
     displayUsers,
     postCreateUser,
     getCreateUser,
     deleteUserbyId,
-    updateUserById,
-    displaySingleUser,
+    displayUserById,
     errorDisplay,
     getAbout,
 }

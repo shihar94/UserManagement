@@ -4,33 +4,19 @@
         <%- include("./partials/nav.ejs") %>
         <section class="container-fluid mt-2 text-center">
             <div class="col-md-12">
-                <h2> All Users</h2>
+                <h2> <%= userList.name%></h2>
             </div>
             
        <section class="container-fluid mt-3">
-        <%console.log(userList.length)%>
-        <% if (userList.length > 0 ){%>
-    
             <table class="table table-striped table-bordered" id="UserTable"> 
                 <tr class="table-primary">
                     <th>Name</th><th>Age</th><th>Email</th><th>Delete</th><th>Update</th>
-                </tr> 
-
-                <% userList.forEach(user=>{%>
+                </tr>               
                 <tr class="table-secondary">
-                    <td><a href="/<%=user._id%>"><%= user.name%></a></td><td><%= user.age%></td><td><%= user.email%></td><td><a href="/delete/<%=user._id%>">Delete</a></a></td><td><a href="/update/<%=user._id%>">Update</a></a></td>
-                </tr>
-
-                    <% }) %>
-
+                    <td><a href="/<%=userList._id%>"><%= userList.name%></a></td><td><%= userList.age%></td><td><%= userList.email%></td><td><a href="/delete/<%=userList._id%>">Delete</a></a></td><td><a href="/update/<%=userList._id%>">Update</a></a></td>
+                </tr>    
             </table>
-
-        <% } else { %>
-            <p>There are no Users to display...</p>
-        <% } %>
        </section>
-
-           
         </section>
        
 
