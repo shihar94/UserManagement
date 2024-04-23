@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const User = require('../models/user')
 const userController = require('../controllers/userController');
 
+router.get("/getUsers" , userController.userControllerGet);
 
 
 
