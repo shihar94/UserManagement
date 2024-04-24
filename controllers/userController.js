@@ -51,23 +51,41 @@ const displayUserById = (req , res) => {
     const id = req.params.id;
     console.log(id);
     console.log("Accessing Update User ID Function");
+    
+    
     User.findById(id)
     .then(result=>{
         //res.json(result);
         console.log("Printing the result");
         console.log(result.name + result.age + result.email);
         console.log("End Printing the result");
-        res.render ('singleUser' , {userList : result , title:"User " + id + " " + result.name});
+        res.render ('update' , {userList : result , title:"User " + id + " " + result.name});
         //res.redirect('/displayUsers');
     }).catch(err=>{
         console.log(err);
     })
-
-
-
     
 }
 
+const updateUserID = (req , res ) => {
+    const id = req.params.id; 
+    console.log(id);
+    console.log(req.body);
+
+    User.findByIdAndUpdate(id ,{
+        name:req.body.name,
+        age:req.body.age,
+        email:req.body.email
+    }).then(result=>{
+        res.redirect('/displayUsers');
+        console.log("Success");
+    }).catch(err=>{
+        console.log(err);
+        res.json("error");
+    })
+
+    
+}
 
 
 const errorDisplay = (req , res) => {
@@ -89,4 +107,5 @@ module.exports = {
     displayUserById,
     errorDisplay,
     getAbout,
+    updateUserID,
 }

@@ -22,6 +22,9 @@ router.get('/delete/:id' , userController.deleteUserbyId);
 
 router.get('/:id' , userController.displayUserById);
 
+router.get('/:id' , userController.displayUserById);
+
+router.post('/:id' , userController.updateUserID)
 
 router.get('', userController.errorDisplay);
 

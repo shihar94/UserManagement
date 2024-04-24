@@ -5,11 +5,11 @@
         <div class="create-blog content">
             <form action="  " method="POST">
               <label for="name">Name:</label>
-              <input type="text" id="name" name="name" required>
+              <input type="text" id="name" name="name" placeholder="<%= userList.name%>" value="<%= userList.name%>" required>
               <label for="Email">Email:</label>
-              <input type="text" id="email" name="email" required>
+              <input type="text" id="email" name="email" placeholder="<%= userList.email%>" value ="<%= userList.email%>" required>
               <label for="Age">Age:</label>
-              <input type="text" id="age" name="age" required>
+              <input type="text" id="age" name="age" placeholder="<%= userList.age%>" value=<%= userList.age%> required>
               <button>Update User</button>
             </form>
           </div>
