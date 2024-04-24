@@ -78,7 +78,7 @@ const updateUserID = (req , res ) => {
         email:req.body.email
     }).then(result=>{
         res.redirect('/displayUsers');
-        console.log("Success");
+        console.log("Success User Updated");
     }).catch(err=>{
         console.log(err);
         res.json("error");
