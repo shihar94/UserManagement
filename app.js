@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const userRoutes = require('./routes/UsersRoutes');
 const loginRoutes = require('./routes/loginRoutes');
 const apiRoutes = require('./routes/apiRoutes');
+const bcrypt = require('bcrypt');
 require('dotenv').config();
 console.log(process.env.PORT);
 
@@ -23,7 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 app.use(express.json());
 app.use('',userRoutes);
-app.use('',loginRoutes);
+app.use('/login',loginRoutes);
 app.use('/api/v1',apiRoutes);
 
 //make connection to mongodb

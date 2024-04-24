@@ -2,32 +2,34 @@ const express = require("express");
 const { route } = require("./UsersRoutes");
 const userLogin = require("../models/loginSchema");
 const router = express.Router();
+const bcrypt = require('bcrypt');
 
 
-router.get("/register" , (req,res)=>{
+router.get('/register' , (req,res)=>{
     res.render('Register',{title:'Register'});
 });
 
-router.post("/register", async (req,res)=>{
+router.post('/register', async (req,res)=>{
     
+    const hashedPassword = await bcrypt.hash(req.body.password,10);
+
     const data = {
         username:req.body.username,
-        password:req.body.password,
+        password:hashedPassword,
     }
-        
-    const existingUser = userLogin.findOne({username:data.username});
-    if(existingUser){
-        
-    }else{
-        const userdata = await userLogin.insertMany(data);
-    }
+
+    console.log(data);
+    
+    const userdata = await userLogin.insertMany(data);
+    res.redirect('/login');
+    
 })
 
-router.get("/login" , (req, res) =>{
-    res.render('login' , {title:"login"});
+router.get('/login' , (req, res) =>{
+    res.render('login' , {title:"Login"});
 })
 
-router.post("/login" , async (req , res) => {
+router.post('/login' , async (req , res) => {
     
     const data = {
         username :req.body.username,
@@ -36,10 +38,10 @@ router.post("/login" , async (req , res) => {
     console.log(data);
     const existingUser = userLogin.findOne({username:data.username})
     .then(result=>{
-        if(data.password == result.password){
-            res.redirect('/displayUsers');
+        
+        res.redirect('/displayUsers');
 
-        }
+        
     })
     console.log(existingUser.username);
     if(existingUser){
