@@ -1,54 +1,58 @@
-const express = require("express");
-const { route } = require("./UsersRoutes");
-const userLogin = require("../models/loginSchema");
+const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcrypt');
+const registerService = require('./regService')
+const passport = require('passport');
 
-
-router.get('/register' , (req,res)=>{
-    res.render('Register',{title:'Register'});
+router.get('/', (req, res) => {
+    if(req.isAuthenticated())
+    {
+        res.send(`<h1>Welcome ${req.user.name}, You are authenticated!!</h1>\
+            <p>Click here to <a href="/logout">Logout</a></p>
+        `)
+        
+    }
+    else{
+        res.send('<h1>You are not authenticated!!</h1>\
+            <p>Please\
+            <a href="/register">Register</a>\
+            or\
+            <a href="/login">Login</a></p>'
+        );
+    }
 });
-
-router.post('/register', async (req,res)=>{
+//User Registration routes
+router.get('/register', (req, res) => {
+    const form = '<h1>Register</h1><form method="post" action="/register">\
+        Enter Username:<br><input type="text" name="name" required>\
+        <br>Enter Password:<br><input type="password" name="password" required>\
+        <br><br><input type="submit" value="Submit"></form>\
+        If already registered,please <a href="/login">Login</a></p>';
+    res.send(form);
     
-    const hashedPassword = await bcrypt.hash(req.body.password,10);
-
-    const data = {
-        username:req.body.username,
-        password:hashedPassword,
-    }
-
-    console.log(data);
-    
-    const userdata = await userLogin.insertMany(data);
-    res.redirect('/login');
-    
-})
-
-router.get('/login' , (req, res) =>{
-    res.render('login' , {title:"Login"});
-})
-
-router.post('/login' , async (req , res) => {
-    
-    const data = {
-        username :req.body.username,
-        password : req.body.password,
-    }
-    console.log(data);
-    const existingUser = userLogin.findOne({username:data.username})
-    .then(result=>{
-        
-        res.redirect('/displayUsers');
-
-        
-    })
-    console.log(existingUser.username);
-    if(existingUser){
-        
-    }
-
-})
-
-
-module.exports = router;
+});
+router.post('/register',registerService)
+//User Login routes
+router.get('/login', (req, res) => {
+   
+    const form = '<h1>Login</h1><form method="POST" action="/login">\
+    Enter Username:<br><input type="text" name="username" required>\
+    <br>Enter Password:<br><input type="password" name="password" required>\
+    <br><br><input type="submit" value="Submit"></form>';
+    res.send(form);
+});
+router.post('/login', passport.authenticate('local', { failureRedirect: '/login-failure'}),(req,res)=>{
+    res.redirect('/');
+});
+router.get('/login-failure', (req, res) => {
+    console.log('login-failed')
+    res.send(`<p>You entered the wrong password.<br>\
+    <a href="/login">login</a><br>\
+    <a href="/register">register</p>`);
+});
+router.get('/logout', (req, res, next) => {
+    console.log('in')
+    req.logOut((err) => {
+        if (err) return next(err);        
+        res.redirect('/');})
+});
+module.exports = router

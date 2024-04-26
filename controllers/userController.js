@@ -13,6 +13,10 @@ const displayUsers = (req , res) => {
 
 const postCreateUser = (req , res) => {
     const user =  new User(req.body);
+    const user1 = new User.create({
+        name:req.body.name,
+        
+    })
     user.save()
     .then(result=> {
         console.log("Success");

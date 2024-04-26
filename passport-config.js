@@ -1,32 +1,33 @@
-const LocalStrategy = require("passport-local").Strategy
-const bcrypt = require("bcrypt")
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const mongoose = require('mongoose')
+const User = mongoose.model('User')
+const bcrypt = require('bcrypt')
 
+const UserLogin = require('./models/loginSchema');
 
-function initialize(passport, getUserByEmail, getUserById){
-    // Function to authenticate users
-    const authenticateUsers = async (email, password, done) => {
-        // Get users by email
-        const user = getUserByEmail(email)
-        if (user == null){
-            return done(null, false, {message: "No user found with that email"})
-        }
-        try {
-            if(await bcrypt.compare(password, user.password)){
-                return done(null, user)
-            } else{
-                return done (null, false, {message: "Password Incorrect"})
-            }
-        } catch (e) {
-            console.log(e);
-            return done(e)
-        }
-    }
-
-    passport.use(new LocalStrategy({usernameField: 'email'}, authenticateUsers))
-    passport.serializeUser((user, done) => done(null, user.id))
-    passport.deserializeUser((id, done) => {
-        return done(null, getUserById(id))
-    })
+const authenticateUser = async (name, password, done) => {
+    UserLogin.findOne({ name: name }).then((user) => {
+        if (!user) 
+            return done(null, false, { message: 'No user with that username' })
+        if(bcrypt.compareSync(password,user.password))
+            return done(null, user)
+        else
+            return done(null, false,{ message: 'wrong password' });
+    }).catch((err) => {   
+        done(err);
+    });
 }
+const strategy  = new LocalStrategy(authenticateUser);
+passport.use(strategy);
+passport.serializeUser((user, done) => {
+    done(null, user.id);
+});
 
-module.exports = initialize
+passport.deserializeUser((userId, done) => {
+    UserLogin.findById(userId)
+        .then((user) => {
+            done(null, user);
+        })
+        .catch(err => done(err))
+});
